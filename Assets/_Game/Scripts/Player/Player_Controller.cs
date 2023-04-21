@@ -9,8 +9,10 @@ public class Player_Controller : MonoBehaviour
     Vector2 input;
 
     Animator animator;
+    [SerializeField] LayerMask solidObjectMask;
+    [SerializeField] LayerMask grassLayer;
 
-  
+
 
     void Start()
     {
@@ -40,11 +42,17 @@ public class Player_Controller : MonoBehaviour
                 Vector3 position = transform.position;
                 position.x += input.x;
                 position.y += input.y;
+
+                if (isMovable(position))
+                {
+                    StartCoroutine(Move(position));
+                }
                 
-                StartCoroutine(Move(position));
             }
         }
 
+        
+        
         animator.SetBool("isMoving", isMoving);
 
         
@@ -60,5 +68,27 @@ public class Player_Controller : MonoBehaviour
         }
         transform.position = position;
         isMoving= false;
+
+        checkForEncounters();
+    }
+
+    private  bool isMovable(Vector3 position)
+    {
+        if (Physics2D.OverlapCircle(position, 0.2f, solidObjectMask))
+        {
+            return false;
+        }
+        return true;
+    }
+
+    private void checkForEncounters()
+    { 
+        if(Physics2D.OverlapCircle(transform.position, 0.2f, grassLayer) != null)
+        {
+            if(Random.Range(1,101)<= 10)
+            {
+                Debug.Log("A Wild Pokemon Appered");
+            }
+        }
     }
 }
