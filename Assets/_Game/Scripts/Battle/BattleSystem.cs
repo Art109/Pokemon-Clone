@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class BattleSystem : MonoBehaviour
 {
+
+    [Header("ATRIBUTOS PLAYER")]
     [SerializeField] BattleUnit playerUnit;
     [SerializeField] BattleHud playerHud;
 
 
+    [Header("ATRIBUTOS INIMIGO")]
     [SerializeField] BattleUnit enemyUnit;
     [SerializeField] BattleHud enemyHud;
 

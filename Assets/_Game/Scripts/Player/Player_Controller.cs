@@ -7,6 +7,7 @@ public class Player_Controller : MonoBehaviour
     public float speed;
     bool isMoving;
     Vector2 input;
+    private Vector3 offsetOverlap = new Vector3(0, -0.5f, 0);
 
     Animator animator;
     [SerializeField] LayerMask solidObjectMask;
@@ -22,7 +23,7 @@ public class Player_Controller : MonoBehaviour
    
     void Update()
     {
-        // Movimentação vai ser de tile em tile 
+        // Movimentaï¿½ï¿½o vai ser de tile em tile 
         if (!isMoving)
         {
 
@@ -33,7 +34,7 @@ public class Player_Controller : MonoBehaviour
             if (input.x != 0)
                 input.y = 0;
            
-            //Não estou usando a velocity pra ter o controle exato do movimento
+            //Nï¿½o estou usando a velocity pra ter o controle exato do movimento
             if (input != Vector2.zero)
             {
                 animator.SetFloat("moveX", input.x);
@@ -83,12 +84,19 @@ public class Player_Controller : MonoBehaviour
 
     private void checkForEncounters()
     { 
-        if(Physics2D.OverlapCircle(transform.position, 0.2f, grassLayer) != null)
+        if(Physics2D.OverlapCircle(transform.position + offsetOverlap, 0.2f, grassLayer) != null)
         {
             if(Random.Range(1,101)<= 10)
             {
+                // logica de comeÃ§ar batalha aqui
                 Debug.Log("A Wild Pokemon Appered");
             }
         }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position+ offsetOverlap,0.2f);
     }
 }

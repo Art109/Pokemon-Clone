@@ -5,15 +5,22 @@ using UnityEngine.UI;
 
 public class BattleHud : MonoBehaviour
 {
-    [SerializeField] Text nameText;
-    [SerializeField] Text lvlText;
+    [SerializeField] Text txtName;
+    [SerializeField] Text txtLevel;
     [SerializeField] HpBar hpBar;
 
     
     public void SetData(Pokemon pokemon)
     {
-        nameText.text = pokemon.Base.Name;
-        lvlText.text = "Lvl " + pokemon.Level;
+        txtName.text = pokemon.Base.Name;
+        txtLevel.text = $"Lvl {pokemon.Level}";
         hpBar.setHP((float)pokemon.HP/ pokemon.MaxHP);
+    }
+
+
+    // tentar chamar esse método assim que um pokemon atacar o outro para atualizar a UI
+    public void UpdateStatus(Pokemon pokemon){
+        hpBar.setHP((float)pokemon.HP/ pokemon.MaxHP);
+
     }
 }
