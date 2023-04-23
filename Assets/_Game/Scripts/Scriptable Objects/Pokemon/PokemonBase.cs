@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO.Enumeration;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Pokémon", menuName = "Pokémon/Create")]
+[CreateAssetMenu(fileName = "Pokemon", menuName = "Pokemon/Create")]
 public class PokemonBase : ScriptableObject
 {
     [SerializeField] string pName;
@@ -17,7 +17,8 @@ public class PokemonBase : ScriptableObject
     [SerializeField] PokemonType type1;
     [SerializeField] PokemonType type2;
 
-    // Base stats
+
+    [Header("BASE STATUS")]
     [SerializeField] int maxHP;
     [SerializeField] int atk;
     [SerializeField] int def;
@@ -28,63 +29,38 @@ public class PokemonBase : ScriptableObject
     [SerializeField] List<LearnableMove> learnableMoves;
 
     public string Name
-    {
-        get { return pName; }
-    }
+    { get { return pName; } }
 
     public string Description
-    {
-        get { return description; }
-    }
+    { get { return description; } }
     public Sprite BackSprite
-    {
-        get { return backSprite; }
-    }
+    { get { return backSprite; } }
     public Sprite FrontSprite
-    {
-        get { return frontSprite; }
-    }
+    { get { return frontSprite; } }
     public PokemonType Type1
-    {
-        get { return type1; }
-    }
+    { get { return type1; } }
     public PokemonType Type2
-    {
-        get { return type2; }
-    }
+    { get { return type2; } }
 
     public int MaxHP
-    {
-        get { return maxHP; }
-    }
+    { get { return maxHP; } }
 
     public int Atk
-    {
-        get { return atk; }
-    }
+    { get { return atk; } }
 
     public int Def
-    {
-        get { return def; }
-    }
+    { get { return def; } }
     public int SpAtk
-    {
-        get { return spAtk; }
-    }
+    { get { return spAtk; } }
     public int SpDef
-    {
-        get { return spDef; }
-    }
+    { get { return spDef; } }
 
     public int Spd
-    {
-        get { return spd; }
-    }
+    { get { return spd; } }
 
     public List<LearnableMove> LearnableMoves
-    {
-        get { return learnableMoves; }
-    }
+    { get { return learnableMoves; } }
+
 
     [System.Serializable]
     public class LearnableMove
@@ -103,26 +79,6 @@ public class PokemonBase : ScriptableObject
         }
     }
 
-    public enum PokemonType
-    {
-        None,
-        Normal,
-        Fire,
-        Water,
-        Electric,
-        Grass,
-        Ice,
-        Fighting,
-        Poison,
-        Ground,
-        Flying,
-        Psychic,
-        Bug,
-        Rock,
-        Ghost,
-        Dragon
-    }
-
-
+    
 
 }
