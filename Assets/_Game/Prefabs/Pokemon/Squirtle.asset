@@ -12,15 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b544c2e0913f6e40a321952fc65822b, type: 3}
   m_Name: Squirtle
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  frontSprite: {fileID: 0}
-  backSprite: {fileID: 0}
-  type1: 0
+  pName: Squirtle
+  description: It shelters itself in its shell, then strikes back with spouts of
+    water at every opportunity.
+  frontSprite: {fileID: 21300000, guid: 786f15d5ee7a8494c8c7f895ca6fcbbb, type: 3}
+  backSprite: {fileID: 21300000, guid: 6e22dbf8bf6239e438b7a4457367c78f, type: 3}
+  type1: 3
   type2: 0
-  maxHP: 0
-  atk: 0
-  def: 0
-  spAtk: 0
-  spDef: 0
-  spd: 0
+  maxHP: 44
+  atk: 48
+  def: 65
+  spAtk: 50
+  spDef: 64
+  spd: 43
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: e9d90d61bc8b93744ad2423089c06764, type: 2}
+    level: 1
+  - moveBase: {fileID: 0}
+    level: 0
+  - moveBase: {fileID: 11400000, guid: c5a43722ae28aa44984678b12d9f7267, type: 2}
+    level: 2
+  - moveBase: {fileID: 11400000, guid: 9dde6e72334571d4ea72b13cf47b2203, type: 2}
+    level: 4

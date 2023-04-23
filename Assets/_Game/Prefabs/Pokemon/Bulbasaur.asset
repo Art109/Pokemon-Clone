@@ -12,15 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b544c2e0913f6e40a321952fc65822b, type: 3}
   m_Name: Bulbasaur
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  frontSprite: {fileID: 0}
-  backSprite: {fileID: 0}
-  type1: 0
-  type2: 0
-  maxHP: 0
-  atk: 0
-  def: 0
-  spAtk: 0
-  spDef: 0
-  spd: 0
+  pName: Bulbasaur
+  description: The seed on its back is filled with nutrients. The seed grows steadily
+    larger as its body grows.
+  frontSprite: {fileID: 21300000, guid: be7bbd9d4e3c08741a933b4d6a9fdadb, type: 3}
+  backSprite: {fileID: 21300000, guid: 421c92de9bd587f48a93c149d49de058, type: 3}
+  type1: 5
+  type2: 8
+  maxHP: 45
+  atk: 49
+  def: 49
+  spAtk: 65
+  spDef: 65
+  spd: 45
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: e9d90d61bc8b93744ad2423089c06764, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 6259f0e113e8c1945a9b807f1cc0f4a5, type: 2}
+    level: 2
+  - moveBase: {fileID: 11400000, guid: 9e24fa9c9f9c1a04b97a86a9d7d4a2a7, type: 2}
+    level: 3

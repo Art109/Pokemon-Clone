@@ -12,15 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b544c2e0913f6e40a321952fc65822b, type: 3}
   m_Name: Charmander
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  frontSprite: {fileID: 0}
-  backSprite: {fileID: 0}
-  type1: 0
+  pName: Charmander
+  description: The flame on its tail indicates Charmander's life force. If it is
+    healthy, the flame burns brightly.
+  frontSprite: {fileID: 21300000, guid: ab73190ba8bde5d4b8bdbf2af2b39f19, type: 3}
+  backSprite: {fileID: 21300000, guid: da2fc078ae1589b498ee0daddfeb7aa6, type: 3}
+  type1: 2
   type2: 0
-  maxHP: 0
-  atk: 0
-  def: 0
-  spAtk: 0
-  spDef: 0
-  spd: 0
+  maxHP: 39
+  atk: 52
+  def: 43
+  spAtk: 60
+  spDef: 50
+  spd: 65
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: 60a6d7fe000f0fc47ac0c3793a6d896b, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 6259f0e113e8c1945a9b807f1cc0f4a5, type: 2}
+    level: 2
+  - moveBase: {fileID: 11400000, guid: ff22316bd9791524388bd159adfb2b5c, type: 2}
+    level: 4

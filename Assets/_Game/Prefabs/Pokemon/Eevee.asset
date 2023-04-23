@@ -12,15 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b544c2e0913f6e40a321952fc65822b, type: 3}
   m_Name: Eevee
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  frontSprite: {fileID: 0}
-  backSprite: {fileID: 0}
-  type1: 0
+  pName: Eevee
+  description: "Eevee, the Evolution Pok\xE9mon. Depending on circumstances, Eevee
+    can evolve"
+  frontSprite: {fileID: 21300000, guid: 3c90f8ec4aa50884e92bacb144a6b20b, type: 3}
+  backSprite: {fileID: 21300000, guid: 3dc569515dd2c7b4aa6c820343bc70ce, type: 3}
+  type1: 1
   type2: 0
-  maxHP: 0
-  atk: 0
-  def: 0
-  spAtk: 0
-  spDef: 0
-  spd: 0
+  maxHP: 55
+  atk: 55
+  def: 50
+  spAtk: 45
+  spDef: 65
+  spd: 55
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: e9d90d61bc8b93744ad2423089c06764, type: 2}
+    level: 1
+  - moveBase: {fileID: 0}
+    level: 0
+  - moveBase: {fileID: 11400000, guid: 6259f0e113e8c1945a9b807f1cc0f4a5, type: 2}
+    level: 2
