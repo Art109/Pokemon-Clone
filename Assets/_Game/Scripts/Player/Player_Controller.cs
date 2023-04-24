@@ -86,7 +86,7 @@ public class Player_Controller : MonoBehaviour
     { 
         if(Physics2D.OverlapCircle(transform.position + offsetOverlap, 0.2f, grassLayer) != null)
         {
-            if(Random.Range(1,101)<= 10)
+            if(Random.Range(1,101) <= 10)
             {
                 // logica de começar batalha aqui
                 Debug.Log("A Wild Pokemon Appered");
