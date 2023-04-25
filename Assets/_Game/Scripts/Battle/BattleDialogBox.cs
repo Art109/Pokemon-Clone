@@ -53,12 +53,37 @@ public class BattleDialogBox : MonoBehaviour
 
     public void UpdateActionSelection(int selectedAction)
     {
-        for(int i = 0; i< actionTexts.Count; i++)
+        for(int i = 0; i < actionTexts.Count; i++)
         {
             if (i == selectedAction)
                 actionTexts[i].color = highlightedColor;
             else
                 actionTexts[i].color = Color.black;
+        }
+    }
+
+    public void UpdateMoveSelection(int selectedMove, Move move)
+    {
+        for (int i = 0; i < moveTexts.Count; i++)
+        {
+            if (i == selectedMove)
+                moveTexts[i].color = highlightedColor;
+            else
+                moveTexts[i].color = Color.black;
+        }
+
+        ppText.text = $"PP {move.PP}/{move.Base.PP}";
+        typeText.text = $"TYPE {move.Base.Type.ToString()}" ;
+    }
+
+    public void SetMovesNames(List<Move> moves)
+    {
+        for(int i = 0; i < moveTexts.Count; i++)
+        {
+            if (i < moves.Count)
+                moveTexts[i].text = moves[i].Base.Name;
+            else
+                moveTexts[i].text = "-";
         }
     }
 }

@@ -28,12 +28,23 @@ public class BattleSystem : MonoBehaviour
     BattleState state;
 
     int currentAction;
+    int currentMove;
 
+
+    private void OnEnable()
+    {
+        Player_Controller.OnPokemonFind+= StartBattle;  // "StartBattle()" é chamado quando o jogador encontra um pokemon
+    }
     private void Start()
     {
         StartCoroutine(SetupBattle());
+        
     }
 
+
+    private void StartBattle(){
+        StartCoroutine(SetupBattle());
+    }
     public IEnumerator SetupBattle()
     {
         playerUnit.Setup();
@@ -41,6 +52,8 @@ public class BattleSystem : MonoBehaviour
 
         enemyUnit.Setup();
         enemyHud.SetData(enemyUnit.Pokemon);
+
+        dialogBox.SetMovesNames(playerUnit.Pokemon.Moves);
 
         yield return dialogBox.TypeDialog($"A wild { enemyUnit.Pokemon.Base.Name} appeared");
         yield return new WaitForSeconds(1f);
@@ -57,11 +70,23 @@ public class BattleSystem : MonoBehaviour
 
     }
 
+    void PlayerMove()
+    {
+        state = BattleState.PlayerMove;
+        dialogBox.EnableActionSelector(false);
+        dialogBox.EnableDialogText(false);
+        dialogBox.EnableMoveSelector(true);
+    }
+
     private void Update()
     {
         if(state == BattleState.PlayerAction)
         {
             HandleActionSelection();
+        }
+        else if(state == BattleState.PlayerMove)
+        {
+            HandleMoveSelection();
         }
     }
 
@@ -79,6 +104,61 @@ public class BattleSystem : MonoBehaviour
                 --currentAction;
             }
         }
+
+
+        dialogBox.UpdateActionSelection(currentAction);
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            if(currentAction == 0)
+            {
+                //Fight
+                PlayerMove();
+            }
+
+            if(currentAction == 1) 
+            {
+                //Run
+
+            }
+        }
+    }
+
+    void HandleMoveSelection()
+    {
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            if (currentMove < playerUnit.Pokemon.Moves.Count - 1)
+                ++currentMove;
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            if (currentMove > 0)
+            {
+                --currentMove;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            if (currentMove < playerUnit.Pokemon.Moves.Count - 2)
+                currentMove += 2;
+        }
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if (currentMove > 1)
+            {
+                currentMove -= 2;
+            }
+        }
+
+        dialogBox.UpdateMoveSelection(currentMove, playerUnit.Pokemon.Moves[currentMove]);
+
+    }
+
+    private void OnDisable()
+    {
+        Player_Controller.OnPokemonFind-= StartBattle;
     }
 
 }
