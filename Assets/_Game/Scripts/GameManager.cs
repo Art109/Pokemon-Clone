@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +9,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]private Camera battleCamera;
     [SerializeField]private BattleSystem battleSystem;
+
+
+    private void OnEnable()
+    {
+        Player_Controller.OnPokemonFind+= StartBattle;
+    }
     void Start()
     {
         
@@ -19,13 +26,18 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void StartBattle(){
-        battleCamera.enabled = true;
+    void StartBattle(){
+        battleSystem.gameObject.SetActive(true);  
     }
 
-    public void EndBattle(){
-        battleCamera.enabled = false;
+    void EndBattle(){
+        battleSystem.gameObject.SetActive(true);  
+    }
 
+
+    private void OnDisable()
+    {
+        Player_Controller.OnPokemonFind-= StartBattle;
     }
 
 }

@@ -29,11 +29,21 @@ public class BattleSystem : MonoBehaviour
 
     int currentAction;
 
+
+    private void OnEnable()
+    {
+        Player_Controller.OnPokemonFind+= StartBattle;  // "StartBattle()" é chamado quando o jogador encontra um pokemon
+    }
     private void Start()
     {
         StartCoroutine(SetupBattle());
+        
     }
 
+
+    private void StartBattle(){
+        StartCoroutine(SetupBattle());
+    }
     public IEnumerator SetupBattle()
     {
         playerUnit.Setup();
@@ -79,6 +89,11 @@ public class BattleSystem : MonoBehaviour
                 --currentAction;
             }
         }
+    }
+
+    private void OnDisable()
+    {
+        Player_Controller.OnPokemonFind-= StartBattle;
     }
 
 }

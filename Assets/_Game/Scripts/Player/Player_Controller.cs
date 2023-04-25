@@ -14,6 +14,9 @@ public class Player_Controller : MonoBehaviour
     [SerializeField] LayerMask grassLayer;
 
 
+    // Actions Events
+    public static event System.Action OnPokemonFind;
+
 
     void Start()
     {
@@ -90,6 +93,7 @@ public class Player_Controller : MonoBehaviour
             {
                 // logica de começar batalha aqui
                 Debug.Log("A Wild Pokemon Appered");
+                OnPokemonFind?.Invoke();
             }
         }
     }
