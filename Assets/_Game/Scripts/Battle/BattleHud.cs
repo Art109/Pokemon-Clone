@@ -9,9 +9,12 @@ public class BattleHud : MonoBehaviour
     [SerializeField] Text txtLevel;
     [SerializeField] HpBar hpBar;
 
-    
+    Pokemon _pokemon;
+
     public void SetData(Pokemon pokemon)
     {
+        _pokemon = pokemon;
+
         txtName.text = pokemon.Base.Name;
         txtLevel.text = $"Lvl {pokemon.Level}";
         hpBar.setHP((float)pokemon.HP/ pokemon.MaxHP);
@@ -19,8 +22,10 @@ public class BattleHud : MonoBehaviour
 
 
     // tentar chamar esse método assim que um pokemon atacar o outro para atualizar a UI
-    public void UpdateStatus(Pokemon pokemon){
-        hpBar.setHP((float)pokemon.HP/ pokemon.MaxHP);
+    public IEnumerator UpdateHP(){
+        yield return hpBar.SetHPSmooth((float)_pokemon.HP/ _pokemon.MaxHP);
 
     }
+
+ 
 }
