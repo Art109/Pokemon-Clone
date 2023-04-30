@@ -27,6 +27,8 @@ public class BattleSystem : MonoBehaviour
 
     BattleState state;
 
+    public static event System.Action OnBattleEnd;
+
     int currentAction;
     int currentMove;
 
@@ -35,14 +37,9 @@ public class BattleSystem : MonoBehaviour
     {
         Player_Controller.OnPokemonFind+= StartBattle;  // "StartBattle()" é chamado quando o jogador encontra um pokemon
     }
-    private void Start()
-    {
-        StartCoroutine(SetupBattle());
-        
-    }
 
 
-    private void StartBattle(){
+    public void StartBattle(){
         StartCoroutine(SetupBattle());
     }
     public IEnumerator SetupBattle()
@@ -87,14 +84,22 @@ public class BattleSystem : MonoBehaviour
         var move = playerUnit.Pokemon.Moves[currentMove];
         yield return dialogBox.TypeDialog($"{playerUnit.Pokemon.Base.name} used {move.Base.Name}");
 
+        playerUnit.PlayAttackAnimation();
+
         yield return new WaitForSeconds(1f);
 
+
+        enemyUnit.PlayHitAnimation();
         bool isFainted = enemyUnit.Pokemon.TakeDamage(move, playerUnit.Pokemon);
         yield return enemyHud.UpdateHP();
 
         if (isFainted)
         {
             yield return dialogBox.TypeDialog($"{enemyUnit.Pokemon.Base.Name} Fainted");
+            enemyUnit.PlayFaintedAnimation();
+
+            yield return new WaitForSeconds(2f);
+            OnBattleEnd?.Invoke();
         }
 
         else
@@ -111,14 +116,22 @@ public class BattleSystem : MonoBehaviour
 
         yield return dialogBox.TypeDialog($"{enemyUnit.Pokemon.Base.name} used {move.Base.Name}");
 
+        enemyUnit.PlayAttackAnimation();
+
         yield return new WaitForSeconds(1f);
 
+
+        playerUnit.PlayHitAnimation();
         bool isFainted = playerUnit.Pokemon.TakeDamage(move, enemyUnit.Pokemon);
         yield return playerHud.UpdateHP();
 
         if (isFainted)
         {
             yield return dialogBox.TypeDialog($"{playerUnit.Pokemon.Base.Name} Fainted");
+            playerUnit.PlayFaintedAnimation();
+
+            yield return new WaitForSeconds(2f);
+            OnBattleEnd?.Invoke();
         }
 
         else
@@ -128,7 +141,7 @@ public class BattleSystem : MonoBehaviour
 
     }
 
-    private void Update()
+    public void HandleUpdate()
     {
         if(state == BattleState.PlayerAction)
         {
@@ -169,6 +182,7 @@ public class BattleSystem : MonoBehaviour
             if(currentAction == 1) 
             {
                 //Run
+                OnBattleEnd?.Invoke();
 
             }
         }

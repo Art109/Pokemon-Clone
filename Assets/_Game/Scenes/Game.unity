@@ -1243,6 +1243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleCamera: {fileID: 977306361}
   battleSystem: {fileID: 996626661}
+  playerController: {fileID: 1533942845}
 --- !u!1 &691715641
 GameObject:
   m_ObjectHideFlags: 0

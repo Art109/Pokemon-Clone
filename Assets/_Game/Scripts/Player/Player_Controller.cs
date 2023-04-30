@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum PlayerState
-{
-    Free,
-    Battle
-}
+
 public class Player_Controller : MonoBehaviour
 {
     public float speed;
@@ -19,7 +15,6 @@ public class Player_Controller : MonoBehaviour
     [SerializeField] LayerMask solidObjectMask;
     [SerializeField] LayerMask grassLayer;
 
-    public PlayerState state;
 
 
     // Actions Events
@@ -29,14 +24,14 @@ public class Player_Controller : MonoBehaviour
     void Start()
     {
         animator= GetComponent<Animator>();
-        state = PlayerState.Free;
+ 
     }
 
    
-    void Update()
+    public void HandleUpdate()
     {
         // Movimenta��o vai ser de tile em tile 
-        if (!isMoving && state == PlayerState.Free)
+        if (!isMoving)
         {
 
             input.x = Input.GetAxisRaw("Horizontal");
@@ -100,8 +95,7 @@ public class Player_Controller : MonoBehaviour
         {
             if(Random.Range(1,101) <= 10)
             {
-                // logica de começar batalha aqui
-                state = PlayerState.Battle;
+                animator.SetBool("isMoving", false);
                 Debug.Log("A Wild Pokemon Appered");
                 OnPokemonFind?.Invoke();
             }
