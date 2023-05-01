@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 
 public enum GameState { FreeRoam, Battle}
 
@@ -39,7 +40,10 @@ public class GameManager : MonoBehaviour
     void StartBattle(){
         state= GameState.Battle;
         battleSystem.gameObject.SetActive(true);  
-        battleSystem.StartBattle();
+
+        var playerParty = playerController.GetComponent<PokemonParty>();
+        var wildPokemon = FindObjectOfType<MapArea>().GetComponent<MapArea>().GetWildPokemon();
+        battleSystem.StartBattle(playerParty,wildPokemon);
     }
 
     void EndBattle(){

@@ -32,22 +32,24 @@ public class BattleSystem : MonoBehaviour
     int currentAction;
     int currentMove;
 
-
-    private void OnEnable()
-    {
-        Player_Controller.OnPokemonFind+= StartBattle;  // "StartBattle()" é chamado quando o jogador encontra um pokemon
-    }
+    PokemonParty playerParty;
+    Pokemon wildPokemon;
 
 
-    public void StartBattle(){
+    
+
+
+    public void StartBattle(PokemonParty playerParty, Pokemon wildPokemon){
+        this.playerParty = playerParty;
+        this.wildPokemon = wildPokemon;
         StartCoroutine(SetupBattle());
     }
     public IEnumerator SetupBattle()
     {
-        playerUnit.Setup();
+        playerUnit.Setup(playerParty.GetHealthyPokemon());
         playerHud.SetData(playerUnit.Pokemon);
 
-        enemyUnit.Setup();
+        enemyUnit.Setup(wildPokemon);
         enemyHud.SetData(enemyUnit.Pokemon);
 
         dialogBox.SetMovesNames(playerUnit.Pokemon.Moves);
@@ -99,7 +101,7 @@ public class BattleSystem : MonoBehaviour
             enemyUnit.PlayFaintedAnimation();
 
             yield return new WaitForSeconds(2f);
-            OnBattleEnd?.Invoke();
+            OnBattleEnd();
         }
 
         else
@@ -131,7 +133,26 @@ public class BattleSystem : MonoBehaviour
             playerUnit.PlayFaintedAnimation();
 
             yield return new WaitForSeconds(2f);
-            OnBattleEnd?.Invoke();
+
+            var nextPokemon = playerParty.GetHealthyPokemon();
+            if(nextPokemon != null)
+            {
+                playerUnit.Setup(nextPokemon);
+                playerHud.SetData(nextPokemon);
+
+                
+                dialogBox.SetMovesNames(nextPokemon.Moves);
+
+                yield return dialogBox.TypeDialog($"Go {nextPokemon.Base.Name}");
+                yield return new WaitForSeconds(1f);
+
+                PlayerAction();
+            }
+            else
+            {
+                OnBattleEnd();
+            }
+            
         }
 
         else
@@ -182,7 +203,7 @@ public class BattleSystem : MonoBehaviour
             if(currentAction == 1) 
             {
                 //Run
-                OnBattleEnd?.Invoke();
+                OnBattleEnd();
 
             }
         }
@@ -235,7 +256,7 @@ public class BattleSystem : MonoBehaviour
 
     private void OnDisable()
     {
-        Player_Controller.OnPokemonFind-= StartBattle;
+        //Player_Controller.OnPokemonFind-= StartBattle;
     }
 
 }

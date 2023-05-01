@@ -97,7 +97,7 @@ public class Player_Controller : MonoBehaviour
             {
                 animator.SetBool("isMoving", false);
                 Debug.Log("A Wild Pokemon Appered");
-                OnPokemonFind?.Invoke();
+                OnPokemonFind();
             }
         }
     }
