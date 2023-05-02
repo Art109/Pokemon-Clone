@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BattleHud : MonoBehaviour
+
+public class PartyMemberUI : MonoBehaviour
 {
     [SerializeField] Text txtName;
     [SerializeField] Text txtLevel;
@@ -17,15 +18,6 @@ public class BattleHud : MonoBehaviour
 
         txtName.text = pokemon.Base.Name;
         txtLevel.text = $"Lvl {pokemon.Level}";
-        hpBar.setHP((float)pokemon.HP/ pokemon.MaxHP);
+        hpBar.setHP((float)pokemon.HP / pokemon.MaxHP);
     }
-
-
-    // tentar chamar esse método assim que um pokemon atacar o outro para atualizar a UI
-    public IEnumerator UpdateHP(){
-        yield return hpBar.SetHPSmooth((float)_pokemon.HP/ _pokemon.MaxHP);
-
-    }
-
- 
 }

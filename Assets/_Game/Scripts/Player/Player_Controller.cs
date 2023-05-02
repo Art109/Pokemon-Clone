@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class Player_Controller : MonoBehaviour
 {
     public float speed;
@@ -14,6 +16,7 @@ public class Player_Controller : MonoBehaviour
     [SerializeField] LayerMask grassLayer;
 
 
+
     // Actions Events
     public static event System.Action OnPokemonFind;
 
@@ -21,10 +24,11 @@ public class Player_Controller : MonoBehaviour
     void Start()
     {
         animator= GetComponent<Animator>();
+ 
     }
 
    
-    void Update()
+    public void HandleUpdate()
     {
         // Movimenta��o vai ser de tile em tile 
         if (!isMoving)
@@ -91,9 +95,9 @@ public class Player_Controller : MonoBehaviour
         {
             if(Random.Range(1,101) <= 10)
             {
-                // logica de começar batalha aqui
+                animator.SetBool("isMoving", false);
                 Debug.Log("A Wild Pokemon Appered");
-                OnPokemonFind?.Invoke();
+                OnPokemonFind();
             }
         }
     }
